@@ -4,13 +4,21 @@
 Write-Host "[*] Iniciando sincronización de Portafolio..." -ForegroundColor Cyan
 
 # 1. Asegurar que estamos en main y todo está guardado
+# Obtenemos la rama actual
+$currentBranch = git rev-parse --abbrev-ref HEAD
+if ($currentBranch -ne "main") {
+    Write-Host "[!] No estás en la rama 'main'. Cambiando a 'main'..." -ForegroundColor Yellow
+    git checkout main
+}
+
 $status = git status --porcelain
 if ($status) {
     Write-Error "Error: Tienes cambios sin guardar en 'main'. Haz commit antes de publicar."
     exit
 }
 
-Write-Host "[*] Subiendo todo a GitLab (Privado)..."
+Write-Host "[*] Sincronizando con GitLab (Privado)..."
+git pull gitlab main --rebase
 git push gitlab main
 
 # 2. Resetear la rama pública desde main (Para asegurar que el README y todo se actualice)
@@ -31,6 +39,7 @@ git rm -r --cached src/payload/ -f 2>$null
 # 4. Confirmar limpieza y subir
 git commit -m "docs: release update to public portfolio" --allow-empty
 Write-Host "[*] Subiendo a GitHub (Público)..." -ForegroundColor Green
+# Actualizamos 'origin public' que ahora está linkeado a GitHub main
 git push origin public:main --force
 
 
