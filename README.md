@@ -2,6 +2,7 @@
 
 ![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python&logoColor=white)
 ![GitLab](https://img.shields.io/badge/GitLab-Repository-orange?logo=gitlab)
+![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue)
 ![Status](https://img.shields.io/badge/Status-Stable-brightgreen)
 ![Educational](https://img.shields.io/badge/Purpose-Educational%20Only-blue)
 ![Warning](https://img.shields.io/badge/⚠-Authorized%20Use%20Only-red)
