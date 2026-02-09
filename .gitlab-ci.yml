@@ -1,3 +1,5 @@
+image: python:3.12
+
 stages:
   - test
   - sast
