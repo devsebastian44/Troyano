@@ -33,8 +33,9 @@ Write-Host "[*] Aplicando filtros de seguridad..." -ForegroundColor Yellow
 git rm -r --cached tests/ -f 2>$null
 git rm --cached .gitlab-ci.yml -f 2>$null
 
-# Eliminar Payload (Malware)
+# Eliminar el código del Payload (Malware) pero mantener el README ético
 git rm -r --cached src/payload/ -f 2>$null
+git reset src/payload/README.md 2>$null
 
 # Eliminar este script de publicación del portafolio público
 git rm --cached publish_public.ps1 -f 2>$null
