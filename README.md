@@ -63,7 +63,7 @@ Este repositorio utiliza una estrategia de **Diferenciación de Entornos**:
 > [!IMPORTANT]
 > El repositorio completo con todo el código funcional está disponible en **GitLab** para acceso completo.
 
-https://gitlab.com/group-cybersecurity-lab/troyano.git
+https://gitlab.com/group-cybersecurity-lab/Troyano-lab.git
 
 
 2. Configurar entorno:
