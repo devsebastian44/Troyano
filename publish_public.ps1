@@ -1,9 +1,17 @@
 # publish_public.ps1
 # Script para sincronizar el trabajo de 'main' (Lab) al Portafolio Público (GitHub)
 
+$ErrorActionPreference = "Stop"
+
 Write-Host "[*] Iniciando sincronización de Portafolio..." -ForegroundColor Cyan
 
-# 1. Asegurar que estamos en main y todo está guardado
+# 0. Asegurar que estamos en main
+if ((git branch --show-current) -ne "main") {
+    Write-Error "Error: Debes ejecutar este script desde la rama 'main'."
+    exit
+}
+
+# 1. Asegurar que todo está guardado
 $status = git status --porcelain
 if ($status) {
     Write-Error "Error: Tienes cambios sin guardar en 'main'. Haz commit antes de publicar."
@@ -16,11 +24,17 @@ git push gitlab main
 # 2. Resetear la rama pública para asegurar limpieza total
 Write-Host "[*] Preparando rama 'public'..."
 
-# Si la rama existe, la borramos y recreamos desde main para tener un punto de partida limpio
+# Verificar si existe y borrarla limpiamente
 if (git show-ref --verify --quiet refs/heads/public) {
     git branch -D public
 }
 git checkout -b public
+
+# Verificar que estamos en la rama correcta antes de borrar nada
+if ((git branch --show-current) -ne "public") {
+    Write-Error "FATAL: Fallo al cambiar a la rama 'public'. Abortando para proteger 'main'."
+    exit
+}
 
 # 3. Limpieza de seguridad técnica (Eliminar archivos que no pertenecen a GitHub)
 Write-Host "[*] Aplicando filtros de seguridad..." -ForegroundColor Yellow
