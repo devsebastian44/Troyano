@@ -49,13 +49,21 @@ El proyecto está estructurado siguiendo estándares profesionales de DevSecOps:
 - Python 3.8+
 - Entorno Virtual (recomendado)
 
-### Instalación
+## 🔒 Estrategia de Seguridad (GitHub vs GitLab)
 
-1. Clonar el repositorio:
-   ```bash
-   git clone https://gitlab.com/tu-usuario/troyano.git
-   cd troyano
-   ```
+Este repositorio utiliza una estrategia de **Diferenciación de Entornos**:
+
+- **GitHub (Público):** Escaparate para portafolio. Contiene la estructura, documentación, diagramas y **pseudocódigo educativo** para evitar la distribución de malware funcional.
+- **GitLab (Privado):** Laboratorio de desarrollo. Contiene la implementación completa, payloads funcionales, tests automatizados y el pipeline de CI/CD con análisis estático de seguridad (SAST).
+
+---
+
+## 🚀 Instalación y Acceso (Bajo Petición)
+
+> [!IMPORTANT]
+> El acceso al repositorio de laboratorio, los payloads funcionales y las instrucciones de despliegue está restringido a investigadores autorizados para prevenir el mal uso de la herramienta.
+
+Para solicitar acceso al entorno de desarrollo en **GitLab** y la documentación técnica completa, por favor contactar al desarrollador.
 
 2. Configurar entorno:
    ```bash

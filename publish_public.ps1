@@ -13,34 +13,30 @@ if ($status) {
 Write-Host "[*] Subiendo todo a GitLab (Privado)..."
 git push gitlab main
 
-# 2. Cambiar a la rama pública (o crearla si no existe)
+# 2. Resetear la rama pública para asegurar limpieza total
 Write-Host "[*] Preparando rama 'public'..."
-if (-not (git show-ref --verify --quiet refs/heads/public)) {
-    Write-Host "Creating 'public' branch..."
-    git checkout -b public
-}
-else {
-    git checkout public
-}
 
-# 3. Fusionar cambios de main
-git merge main --no-edit
+# Si la rama existe, la borramos y recreamos desde main para tener un punto de partida limpio
+if (git show-ref --verify --quiet refs/heads/public) {
+    git branch -D public
+}
+git checkout -b public
 
-# 4. Limpieza de seguridad técnica (Eliminar archivos que no pertenecen a GitHub)
+# 3. Limpieza de seguridad técnica (Eliminar archivos que no pertenecen a GitHub)
 Write-Host "[*] Aplicando filtros de seguridad..." -ForegroundColor Yellow
-# Eliminar carpeta de tests (GitHub no necesita pruebas internas de laboratorio)
-if (Test-Path tests) { git rm -r --cached tests/ -f 2>$null }
 
-# Eliminar configuración de CI/CD de GitLab
-if (Test-Path .gitlab-ci.yml) { git rm --cached .gitlab-ci.yml -f 2>$null }
+# Forzar eliminación de carpetas y archivos sensibles
+# Usamos -r -f --cached para asegurar que se vayan del índice
+git rm -r -f --cached tests/ 2>$null
+git rm -f --cached .gitlab-ci.yml 2>$null
+git rm -r -f --cached src/payload/ 2>$null
 
-# Eliminar el payload real (Malware funcional) para cumplir normas de GitHub
-if (Test-Path src/payload) { 
-    git rm -r --cached src/payload/ -f 2>$null 
-    # Opcional: Crear un README placeholder en su lugar
-    New-Item -Path src/payload/README.md -Value "Contenido removido por seguridad en la versión pública." -Force | Out-Null
-    git add src/payload/README.md
+# 4. Crear placeholder para payload
+$placeholder = "src/payload/README.md"
+if (-not (Test-Path $placeholder)) {
+    New-Item -Path $placeholder -Value "# Restricted Content`n`nThe original source code for the payload component has been removed from this public repository for security and ethical reasons.`n`nThis component is available only in the private research laboratory environment." -Force | Out-Null
 }
+git add -f $placeholder
 
 # 5. Confirmar limpieza y subir
 git add .
