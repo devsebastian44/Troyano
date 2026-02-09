@@ -37,8 +37,5 @@ build:
   stage: build
   script:
     - echo "Building artifacts (e.g., PyInstaller/PyArmor)..."
-    - # Add actual build commands here if applicable
-    - # pip install pyarmor
-    - # pyarmor gen src/payload/troyano.py
   only:
     - main
