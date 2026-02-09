@@ -15,21 +15,21 @@ cache:
 
 before_script:
   - python -V
-  - pip install virtualenv
-  - virtualenv venv
+  - python -m venv venv
   - source venv/bin/activate
+  - python -m pip install --upgrade pip
 
 test:
   stage: test
   script:
-    - pip install pytest
-    - pytest tests/
+    - python -m pip install pytest
+    - python -m pytest tests/
 
 sast:
   stage: sast
   script:
-    - pip install bandit
-    - bandit -r src/ -f json -o bandit-report.json || true
+    - python -m pip install bandit
+    - python -m bandit -r src/ -f json -o bandit-report.json || true
   artifacts:
     paths:
       - bandit-report.json
