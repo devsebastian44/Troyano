@@ -48,6 +48,7 @@ git push origin public:main --force
 
 # 6. Volver al laboratorio
 Write-Host "[*] Volviendo a la rama 'main' (Lab)..."
-git checkout main
+git clean -fd 2>$null
+git checkout main -f
 
 Write-Host "[🎉] ¡Portafolio actualizado con éxito!" -ForegroundColor Green
