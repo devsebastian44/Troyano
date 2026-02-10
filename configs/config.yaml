@@ -1,8 +1,0 @@
-# Network Configuration
-server:
-  host: "0.0.0.0"
-  port: 4444
-
-payload:
-  connection_ip: "192.168.1.10" # CHANGE THIS to your C2 IP
-  connection_port: 4444
