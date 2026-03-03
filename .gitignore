@@ -67,6 +67,26 @@ venv.bak/
 
 # Logs
 *.log
+*.err
+*.out
+
+# Credenciales y Secretos
+*.pem
+*.key
+*.cert
+credentials.json
+secrets.yml
+
+# Backups y Archivos Temporales
+*.bak
+*.swp
+*.tmp
+*~
+.DS_Store
+
+# Datos del Laboratorio Secundario
+data/*
+!data/sample_session.json
 
 # Troyano specific
 # Avoid uploading actual builds/dist folders if generated locally

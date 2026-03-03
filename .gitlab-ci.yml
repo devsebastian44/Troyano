@@ -1,6 +1,7 @@
 image: python:3.12
 
 stages:
+  - lint
   - test
   - sast
   - build
@@ -18,6 +19,12 @@ before_script:
   - python -m venv venv
   - source venv/bin/activate
   - python -m pip install --upgrade pip
+
+lint:
+  stage: lint
+  script:
+    - python -m pip install flake8
+    - python -m flake8 src/ tests/ --max-line-length=120 || true
 
 test:
   stage: test

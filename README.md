@@ -30,16 +30,20 @@ El proyecto está estructurado siguiendo estándares profesionales de DevSecOps:
 
 ```text
 /
-├── configs/          # Plantillas de configuración
-├── scripts/          # Scripts de automatización y construcción
+├── configs/          # Plantillas de configuración (.gitignore protege variables reales)
+├── data/             # Recolección de datos, capturas y volcados (Solo en entorno privado)
+├── diagrams/         # Diagramas de arquitectura y flujo (C4, Draw.io)
+├── docs/             # Documentación técnica, RFCs y manuales operativos
+├── scripts/          # Funcionalidad DevSecOps y automatizaciones (ej. publish_public.ps1)
 ├── src/
-│   ├── payload/      # Payload del lado del cliente (Objetivo)
-│   └── server/       # Listener del lado del servidor (Atacante)
-├── tests/            # Pruebas unitarias y de seguridad
-└── README.md         # Documentación
+│   ├── payload/      # Payload del lado del cliente / bot (Exclusivo entorno privado)
+│   └── server/       # Listener del lado del servidor (C2)
+├── tests/            # Cobertura de pruebas unitarias y mocks (Exclusivo entorno privado)
+├── .gitlab-ci.yml    # Pipeline CI/CD (Tests + SAST)
+└── README.md         # Documentación principal del proyecto
 ```
 
-### Componentes
+### Componentes Activos
 1. **Servidor (C2)**: Escucha conexiones entrantes y emite comandos.
 2. **Payload (Bot)**: Se conecta al servidor y ejecuta las instrucciones recibidas.
 
@@ -49,12 +53,29 @@ El proyecto está estructurado siguiendo estándares profesionales de DevSecOps:
 - Python 3.8+
 - Entorno Virtual (recomendado)
 
-## 🔒 Estrategia de Seguridad (GitHub vs GitLab)
+## 🔒 Estrategia DevSecOps: Publicación Segura (GitHub vs GitLab)
 
-Este repositorio utiliza una estrategia de **Diferenciación de Entornos**:
+Este repositorio implementa una estrategia avanzada de **Diferenciación de Entornos** (Separación Público/Privado) para administrar el desarrollo profesional frente a la exposición pública:
 
-- **GitHub (Público):** Escaparate para portafolio. Contiene la estructura, documentación, diagramas y **pseudocódigo educativo** para evitar la distribución de malware funcional.
-- **GitLab (Privado):** Laboratorio de desarrollo. Contiene la implementación completa, payloads funcionales, tests automatizados y el pipeline de CI/CD con análisis estático de seguridad (SAST).
+- **GitLab (Entorno Privado / Source of Truth):** Laboratorio de desarrollo completo. Contiene la implementación funcional, todos los tests, automatización CI/CD, configuraciones, payloads completos y scripts críticos.
+- **GitHub (Entorno Público / Portafolio educativo):** Versión sanitizada que actúa como un escaparate de arquitectura técnica y documentación, sin exponer el funcionamiento malicioso o la infraestructura interna.
+
+### Flujo de Sancanitización Automática (`publish_public.ps1`)
+
+Para garantizar de forma consistente y auditable que no se filtren artefactos sensibles en la rama de portafolio, el repositorio utiliza el script de seguridad integrado en `scripts/publish_public.ps1`. 
+
+Este script oficial de publicación realiza los siguientes pasos DevSecOps:
+1. **Validación Pre-vuelo**: Comprueba la limpieza del árbol y que la rama sea `main`.
+2. **Sincronización Laboratorio**: Asegura el almacenamiento de todos los cambios de desarrollo en GitLab.
+3. **Escudo de Rama**: Crea una rama paralela e independiente (`public`).
+4. **Sanitización DevSecOps**:
+   - Elimina `tests/` (Oculta métodos internos de aserción).
+   - Elimina `configs/` (Prevención estructurada de fugas).
+   - Elimina `scripts/` (Protege rutinas y despliegues del lab).
+   - Elimina `src/payload/` (Desarma el componente ofensivo).
+   - Elimina `.gitlab-ci.yml` (Oculta la topología de CI).
+5. **Implementación Push Controlada**: Inyecta una nueva snapshot purgada a GitHub con Conventional Commits.
+6. **Rollback Local**: Regresa el directorio de trabajo local y limpio a `main` para evitar la interrupción del desarrollo.
 
 ---
 

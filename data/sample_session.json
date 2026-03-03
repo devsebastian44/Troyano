@@ -1,0 +1,18 @@
+{
+  "session_id": "lab_sim_001",
+  "timestamp": "2026-03-03T10:00:00Z",
+  "target_ip": "192.168.1.55",
+  "status": "connected",
+  "events": [
+    {
+      "time": "10:01:23",
+      "command_issued": "whoami",
+      "response_size_bytes": 14
+    },
+    {
+      "time": "10:05:10",
+      "command_issued": "ipconfig",
+      "response_size_bytes": 1024
+    }
+  ]
+}
