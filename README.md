@@ -17,6 +17,8 @@ Este proyecto es un **Remote Access Trojan (RAT)** de investigación desarrollad
 
 El proyecto sigue una **estrategia DevSecOps de doble repositorio**: el entorno de desarrollo activo y el código fuente completo residen en GitLab (privado), mientras que GitHub actúa como vitrina pública y sanitizada del portafolio técnico. Esta separación garantiza que los componentes operacionales sensibles nunca se expongan públicamente, cumpliendo con principios de divulgación responsable.
 
+Este proyecto parece estar orientado tanto a la **investigación personal en malware** como a la **demostración de buenas prácticas de seguridad en el ciclo de desarrollo**.
+
 ---
 
 ## ⚙️ Features
