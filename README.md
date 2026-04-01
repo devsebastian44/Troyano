@@ -1,137 +1,259 @@
-# 🛡️ Troyano en Python (Educativo)
+# 🛡️ Troyano — RAT & Framework C2 en Python
 
-![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python&logoColor=white)
-![GitLab](https://img.shields.io/badge/GitLab-Repository-orange?logo=gitlab)
-![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue)
-![Status](https://img.shields.io/badge/Status-Stable-brightgreen)
-![Educational](https://img.shields.io/badge/Purpose-Educational%20Only-blue)
-![Warning](https://img.shields.io/badge/⚠-Authorized%20Use%20Only-red)
+![Python](https://img.shields.io/badge/Python-3.12+-blue?style=flat&logo=python&logoColor=white)
+![Platform](https://img.shields.io/badge/Platform-Windows%2010-informational?style=flat&logo=windows&logoColor=white)
+![Security](https://img.shields.io/badge/Tipo-Malware%20Research-critical?style=flat&logo=hackthebox&logoColor=white)
+![DevSecOps](https://img.shields.io/badge/Arquitectura-DevSecOps-purple?style=flat&logo=gitlab&logoColor=white)
+![CI](https://img.shields.io/badge/CI%2FCD-GitLab%20Pipelines-orange?style=flat&logo=gitlab&logoColor=white)
+![License](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-blue?style=flat&logo=creativecommons&logoColor=white)
 
-## 🔍 Descripción del Proyecto
-
-Este repositorio contiene una implementación básica de un Troyano de Acceso Remoto (RAT) en Python, diseñado estrictamente con **fines educativos** y para **investigación en análisis de malware**. Demuestra los conceptos fundamentales de la arquitectura Cliente-Servidor utilizada en frameworks C2 (Comando y Control).
-
-Este proyecto forma parte de un portafolio de ciberseguridad que demuestra comprensión de:
-- 📡 Programación de Sockets (TCP/IP)
-- 💻 Ejecución Remota de Comandos
-- 📂 Manipulación del Sistema de Archivos
-- 🛡️ Técnicas de Evasión y Ofuscación (aplicación teórica)
-
-## ⚠️ Aviso Legal y Ético
-
-> [!IMPORTANT]
-> **Esta herramienta es SOLO PARA FINES EDUCATIVOS.**
->
-> El autor no aprueba el uso de este software para fines maliciosos. El uso de estas herramientas para atacar objetivos sin el consentimiento mutuo previo es ilegal. Es responsabilidad del usuario final obedecer todas las leyes locales, estatales y federales aplicables. Los desarrolladores no asumen ninguna responsabilidad y no son responsables de ningún mal uso o daño causado por este programa.
-
-## 🏗️ Arquitectura del Proyecto
-
-El proyecto está estructurado siguiendo estándares profesionales de DevSecOps:
-
-```text
-/
-├── configs/          # Plantillas de configuración (.gitignore protege variables reales)
-├── data/             # Recolección de datos, capturas y volcados (Solo en entorno privado)
-├── diagrams/         # Diagramas de arquitectura y flujo (C4, Draw.io)
-├── docs/             # Documentación técnica, RFCs y manuales operativos
-├── scripts/          # Funcionalidad DevSecOps y automatizaciones (ej. publish_public.ps1)
-├── src/
-│   ├── payload/      # Payload del lado del cliente / bot (Exclusivo entorno privado)
-│   └── server/       # Listener del lado del servidor (C2)
-├── tests/            # Cobertura de pruebas unitarias y mocks (Exclusivo entorno privado)
-├── .gitlab-ci.yml    # Pipeline CI/CD (Tests + SAST)
-└── README.md         # Documentación principal del proyecto
-```
-
-### Componentes Activos
-1. **Servidor (C2)**: Escucha conexiones entrantes y emite comandos.
-2. **Payload (Bot)**: Se conecta al servidor y ejecuta las instrucciones recibidas.
-
-## 🚀 Comenzando (Entorno de Laboratorio)
-
-### Requisitos Previos
-- Python 3.8+
-- Entorno Virtual (recomendado)
-
-## 🔒 Estrategia DevSecOps: Publicación Segura (GitHub vs GitLab)
-
-Este repositorio implementa una estrategia avanzada de **Diferenciación de Entornos** (Separación Público/Privado) para administrar el desarrollo profesional frente a la exposición pública:
-
-- **GitLab (Entorno Privado / Source of Truth):** Laboratorio de desarrollo completo. Contiene la implementación funcional, todos los tests, automatización CI/CD, configuraciones, payloads completos y scripts críticos.
-- **GitHub (Entorno Público / Portafolio educativo):** Versión sanitizada que actúa como un escaparate de arquitectura técnica y documentación, sin exponer el funcionamiento malicioso o la infraestructura interna.
-
-### Flujo de Sancanitización Automática (`publish_public.ps1`)
-
-Para garantizar de forma consistente y auditable que no se filtren artefactos sensibles en la rama de portafolio, el repositorio utiliza el script de seguridad integrado en `scripts/publish_public.ps1`. 
-
-Este script oficial de publicación realiza los siguientes pasos DevSecOps:
-1. **Validación Pre-vuelo**: Comprueba la limpieza del árbol y que la rama sea `main`.
-2. **Sincronización Laboratorio**: Asegura el almacenamiento de todos los cambios de desarrollo en GitLab.
-3. **Escudo de Rama**: Crea una rama paralela e independiente (`public`).
-4. **Sanitización DevSecOps**:
-   - Elimina `tests/` (Oculta métodos internos de aserción).
-   - Elimina `configs/` (Prevención estructurada de fugas).
-   - Elimina `scripts/` (Protege rutinas y despliegues del lab).
-   - Elimina `src/payload/` (Desarma el componente ofensivo).
-   - Elimina `.gitlab-ci.yml` (Oculta la topología de CI).
-5. **Implementación Push Controlada**: Inyecta una nueva snapshot purgada a GitHub con Conventional Commits.
-6. **Rollback Local**: Regresa el directorio de trabajo local y limpio a `main` para evitar la interrupción del desarrollo.
+> ⚠️ **AVISO ÉTICO:** Este proyecto es de uso estrictamente educativo y para investigación en ciberseguridad defensiva. El repositorio público en GitHub contiene únicamente componentes sanitizados, sin payloads operacionales. El autor no se responsabiliza por el uso indebido de este material fuera de entornos autorizados y controlados.
 
 ---
 
-## 🚀 Instalación y Acceso (Bajo Petición)
+## 🧠 Overview
 
-> [!IMPORTANT]
-> El repositorio completo con todo el código funcional está disponible en **GitLab** para acceso completo.
+Este proyecto es un **Remote Access Trojan (RAT)** de investigación desarrollado íntegramente en Python, diseñado para funcionar sobre sistemas **Windows 10**. Implementa una arquitectura clásica de **Comando y Control (C2)** basada en comunicación TCP/IP, con el objetivo de estudiar, desde una perspectiva técnica ofensiva-defensiva, los vectores de ataque utilizados por malware real en entornos controlados de laboratorio.
 
-https://gitlab.com/group-cybersecurity-lab/Troyano-lab.git
+El proyecto sigue una **estrategia DevSecOps de doble repositorio**: el entorno de desarrollo activo y el código fuente completo residen en GitLab (privado), mientras que GitHub actúa como vitrina pública y sanitizada del portafolio técnico. Esta separación garantiza que los componentes operacionales sensibles nunca se expongan públicamente, cumpliendo con principios de divulgación responsable.
 
+---
 
-2. Configurar entorno:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # Windows: venv\Scripts\activate
-   pip install -r requirements.txt # (si aplica)
-   ```
+## ⚙️ Features
 
-3. Configurar Conexión:
-   Edita `configs/config.yaml` o modifica la dirección IP en `src/payload/troyano.py` para que apunte a tu listener.
+- **Arquitectura C2 Cliente-Servidor** implementada sobre sockets TCP/IP nativos de Python, permitiendo control remoto de sistemas objetivo en red.
+- **Payload del lado cliente** (`src/payload/`) diseñado para ejecución en máquinas Windows 10, encargado de establecer la conexión reversa hacia el listener.
+- **Servidor Listener C2** (`src/server/`) responsable de recibir conexiones entrantes, emitir comandos y gestionar las sesiones activas.
+- **Ofuscación del payload** mediante integración con **PyArmor**, dificultando el análisis estático y la detección por soluciones antivirus convencionales.
+- **Sanitización automatizada** del repositorio público a través del script `publish_public.ps1` (PowerShell), el cual elimina componentes sensibles antes de cada publicación en GitHub.
+- **Pipeline CI/CD en GitLab** con etapas de linting (`flake8`), pruebas unitarias con mocks de red (`pytest`) y análisis estático de seguridad (`bandit`).
+- **Estructura profesional de proyecto** con separación por responsabilidades: código fuente, datos de laboratorio, diagramas de arquitectura y documentación técnica.
+- **Gestión segura de secretos** mediante `.gitignore` estricto que excluye credenciales, claves `.pem`, configuraciones de red y archivos `.env`.
 
-### Uso
+---
 
-1. **Iniciar el Listener:**
-   ```bash
-   python src/server/server.py
-   ```
+## 🛠️ Tech Stack
 
-2. **Ejecutar Payload (en VM/Objetivo):**
-   ```bash
-   python src/payload/troyano.py
-   ```
+| Componente | Tecnología |
+|---|---|
+| Lenguaje principal | Python 3.12+ |
+| Comunicación de red | Sockets TCP/IP (stdlib) |
+| Ofuscación de payload | PyArmor |
+| Empaquetado / compilación | PyInstaller |
+| Linting de código | flake8 |
+| Testing | pytest |
+| Análisis de seguridad estático | bandit |
+| CI/CD | GitLab Pipelines (`.gitlab-ci.yml`) |
+| Automatización de publicación | PowerShell (`publish_public.ps1`) |
+| Plataforma objetivo | Windows 10 |
+| Diagramas de arquitectura | Draw.io / C4 Model |
+| Licencia | Creative Commons BY-NC-SA 4.0 |
 
-3. **Comandos Disponibles:**
-   - `cd <ruta>`: Cambiar directorio
-   - `download <archivo>`: Descargar archivo del objetivo
-   - `<cmd>`: Ejecutar comando del sistema (ej. `dir`, `whoami`)
-   - `exit`: Cerrar conexión
+---
 
-## 🧪 Pruebas y CI/CD
+## 📦 Installation
 
-Este proyecto utiliza **GitLab CI/CD** para pruebas automatizadas y análisis de seguridad.
-- **Pruebas Unitarias**: Verifica la lógica de conexión (mocked).
-- **SAST**: Pruebas de Seguridad de Aplicaciones Estáticas usando `bandit` para identificar vulnerabilidades en el código.
+> **Requisito previo:** Acceso al repositorio fuente completo en GitLab (el repositorio público en GitHub no contiene el payload operacional).
 
-Para ejecutar pruebas localmente:
+### 1. Clonar el repositorio (entorno de laboratorio)
 ```bash
-python -m unittest discover tests/
+git clone https://gitlab.com/group-cybersecurity-lab/Troyano.git
+cd Troyano
 ```
 
-## 🔐 Ofuscación (investigación red team)
-
-Para la investigación sobre evasión de AV, el payload puede ser ofuscado usando `pyarmor`.
-*Nota: Las técnicas detalladas de ofuscación están reservadas para el repositorio privado de GitLab.*
-
+### 2. Crear y activar el entorno virtual
 ```bash
-# Ejemplo de comando
-pyarmor gen src/payload/troyano.py
+# Windows
+python -m venv venv
+venv\Scripts\activate
+
+# Linux/macOS (para desarrollo)
+python3 -m venv venv
+source venv/bin/activate
 ```
+
+### 3. Instalar dependencias
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configurar el entorno
+
+Copia el archivo de ejemplo y define tus variables de entorno:
+```bash
+cp .env.example .env
+# Edita .env con los parámetros de red: HOST, PORT, etc.
+```
+
+---
+
+## ▶️ Usage
+
+> Todos los pasos de uso deben realizarse **exclusivamente en entornos de laboratorio aislados** (máquinas virtuales sin conexión a redes productivas), con autorización explícita sobre los sistemas involucrados.
+
+### Iniciar el Listener (Servidor C2)
+```bash
+python src/server/server.py
+```
+
+El servidor quedará en escucha en el host y puerto definidos en la configuración, esperando conexiones entrantes del payload.
+
+### Ejecutar el Payload (Cliente / Agente)
+
+En la máquina objetivo de prueba (VM):
+```bash
+python src/payload/troyano.py
+```
+
+### Ofuscar el Payload (opcional, entorno de lab)
+```bash
+# Usando scripts internos del laboratorio con PyArmor
+pyarmor pack -e " --onefile" src/payload/troyano.py
+```
+
+### Publicar versión sanitizada a GitHub
+```powershell
+# Desde PowerShell en el entorno de desarrollo
+.\scripts\publish_public.ps1
+```
+
+### Ejecutar el pipeline de calidad
+```bash
+# Linting
+flake8 src/
+
+# Tests con mocks
+pytest tests/
+
+# Análisis estático de seguridad
+bandit -r src/ -o bandit-report.json
+```
+
+---
+
+## 📁 Project Structure
+```
+Troyano/
+│
+├── data/                        # Muestras de sesiones, volcados y capturas de laboratorio
+│   └── sample_session.json      # Única muestra pública incluida (resto en .gitignore)
+│
+├── diagrams/                    # Diagramas de arquitectura del sistema
+│                                # (C4 Model, flujos de red, Draw.io)
+│
+├── docs/                        # Documentación técnica, RFCs y manuales operativos
+│
+├── src/
+│   ├── payload/                 # Componente cliente (agente de infección)
+│   │   └── troyano.py           # Punto de entrada del payload — ELIMINADO en repo público
+│   │
+│   └── server/                  # Componente servidor (Listener C2)
+│       └── server.py            # Listener TCP que gestiona sesiones remotas
+│
+├── tests/                       # Suite de pruebas unitarias con mocks de red
+│                                # ELIMINADO en repo público (protect assertion methods)
+│
+├── configs/                     # Plantillas de configuración de red y parámetros
+│                                # ELIMINADO en repo público (protect secrets)
+│
+├── scripts/
+│   └── publish_public.ps1       # Script PowerShell de sanitización y publicación a GitHub
+│                                # ELIMINADO en repo público (protect DevOps logic)
+│
+├── .gitlab-ci.yml               # Pipeline CI/CD: lint → test → SAST
+│                                # ELIMINADO en repo público
+│
+├── .gitignore                   # Exclusiones estrictas: venv, .env, *.pem, *.key, data/*
+├── LICENSE                      # CC BY-NC-SA 4.0 — Copyright 2025 Sebastián Zhunaula
+└── README.md                    # Documentación principal del proyecto
+```
+
+> **Nota:** Las carpetas `tests/`, `configs/`, `scripts/` y `src/payload/` son **deliberadamente eliminadas** del repositorio público en GitHub mediante el script de sanitización `publish_public.ps1`, como parte de la estrategia DevSecOps de divulgación responsable.
+
+---
+
+## 🔐 Security
+
+### Modelo de Amenaza y Uso Responsable
+
+Este proyecto modela técnicas utilizadas por **malware real de tipo RAT**, y su estudio tiene un valor defensivo directo: comprender cómo operan estos vectores es fundamental para diseñar detecciones, reglas SIEM, y políticas de seguridad más efectivas.
+
+### Superficies de riesgo identificadas en el código
+
+- **Comunicación sin cifrado explícito en capa de aplicación:** La conexión TCP/IP entre payload y servidor podría ser detectada por inspección de tráfico (DPI). En entornos de investigación avanzados, se recomienda implementar cifrado TLS o túneles cifrados.
+- **Ejecución remota de comandos:** La arquitectura C2 implica capacidad de ejecutar instrucciones arbitrarias en el sistema objetivo. `bandit` detecta y alerta sobre el uso de primitivas como `subprocess`, `os.system` o `eval` en el análisis SAST.
+- **Ofuscación con PyArmor:** Reduce la superficie de detección estática, pero no garantiza indetectabilidad frente a soluciones EDR modernas con análisis de comportamiento dinámico.
+- **Gestión de secretos:** El `.gitignore` excluye explícitamente `*.pem`, `*.key`, `.env`, y `credentials.json`, previniendo fugas de configuraciones de red sensibles.
+
+### Principios de Divulgación Responsable aplicados
+
+- El código del payload (`src/payload/`) **nunca se publica** en repositorios públicos.
+- Cada publicación hacia GitHub pasa por el proceso de sanitización automatizado y auditable (`publish_public.ps1`).
+- Los datos de laboratorio reales (`data/*`) están excluidos del repositorio, con excepción de una muestra de referencia inofensiva.
+- El análisis SAST con `bandit` es una etapa **obligatoria y bloqueante** en el pipeline de CI/CD.
+
+---
+
+## 🌐 Repository Architecture
+
+Este proyecto sigue una arquitectura distribuida de doble repositorio, diseñada para separar de forma auditable el entorno de investigación activo del portafolio público:
+
+**GitHub** actúa como punto de presentación técnica: contiene la documentación, diagramas de arquitectura y componentes de red inofensivos. Es la cara pública del proyecto.
+
+**GitLab** es el entorno de laboratorio completo y la fuente de verdad: contiene el código fuente íntegro, la suite de tests, el pipeline CI/CD (`flake8` → `pytest` → `bandit`) y los componentes operacionales que nunca se exponen públicamente.
+
+### 🔗 Full Source Code
+
+👉 Código completo disponible en GitLab: [https://gitlab.com/group-cybersecurity-lab/Troyano](https://gitlab.com/group-cybersecurity-lab/Troyano)
+
+---
+
+## 🚀 Roadmap
+
+Basado en la arquitectura del proyecto y las herramientas detectadas, estas son las mejoras técnicas que probablemente enriquecerían el laboratorio:
+
+- **Implementar cifrado TLS en el canal C2** para simular con mayor fidelidad el comportamiento de RATs modernos y hacer el tráfico de red indistinguible de conexiones legítimas HTTPS.
+- **Persistencia en el sistema objetivo:** Incorporar módulos de persistencia (registro de Windows, tareas programadas) como vector de estudio defensivo.
+- **Módulo de captura de pantalla / keylogger:** Ampliar las capacidades de demostración del payload para análisis de técnicas de exfiltración.
+- **Dashboard web para el servidor C2:** Reemplazar la interfaz CLI del listener por un panel web (Flask/FastAPI) para una gestión visual de sesiones activas.
+- **Integración con VirusTotal API:** Automatizar el análisis de detección del payload compilado contra motores antivirus como parte del pipeline CI/CD.
+- **Contenedorización del entorno de laboratorio:** Usar Docker para empaquetar el servidor C2 y garantizar reproducibilidad del entorno de investigación.
+- **Reglas YARA y Sigma:** Incluir reglas de detección derivadas del propio proyecto, documentando cómo detectar el RAT que se está construyendo.
+
+---
+
+## 📄 License
+
+Este proyecto está distribuido bajo la licencia **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)**.
+
+Esto implica que:
+- ✅ Puedes estudiar, compartir y adaptar el material.
+- ❌ **No** puedes utilizarlo con fines comerciales.
+- ❌ **No** puedes distribuir versiones modificadas bajo términos más restrictivos.
+- ✅ Debes dar crédito al autor original.
+
+📄 [Ver licencia completa](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+Copyright © 2025 **Sebastián Zhunaula** (devsebastian44)
+
+---
+
+## 👨‍💻 Author
+
+<table>
+  <tr>
+    <td align="center">
+      <b>Sebastián Zhunaula</b><br/>
+      <sub>Security Researcher · Python Developer · DevSecOps</sub><br/><br/>
+      <a href="https://github.com/devsebastian44">
+        <img src="https://img.shields.io/badge/GitHub-devsebastian44-black?style=flat&logo=github" />
+      </a>
+      <br/>
+      <a href="https://gitlab.com/group-cybersecurity-lab">
+        <img src="https://img.shields.io/badge/GitLab-group--cybersecurity--lab-orange?style=flat&logo=gitlab" />
+      </a>
+    </td>
+  </tr>
+</table>
+
+> Este proyecto forma parte de un portafolio profesional en ciberseguridad ofensiva-defensiva, con enfoque en investigación de malware, arquitecturas C2 y prácticas modernas de DevSecOps aplicadas a entornos de alto riesgo.
