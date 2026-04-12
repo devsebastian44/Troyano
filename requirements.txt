@@ -1,0 +1,8 @@
+# DevSecOps & QA Tools
+flake8>=7.0.0
+pytest>=8.0.0
+bandit>=1.7.8
+
+# Build & Obfuscation Tools
+pyinstaller>=6.4.0
+pyarmor>=8.5.0
