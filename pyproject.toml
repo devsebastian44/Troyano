@@ -1,0 +1,25 @@
+[project]
+name = "troyano"
+version = "1.0.0"
+description = "A research RAT and C2 framework in Python for educational purposes."
+authors = [
+    {name = "Sebastián Zhunaula", email = "devsebastian44@users.noreply.github.com"}
+]
+dependencies = [
+    "pyarmor>=8.0.0",
+    "pyinstaller>=6.0.0",
+]
+requires-python = ">=3.12"
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.flake8]
+max-line-length = 120
+extend-ignore = "E203"
+exclude = ".git,__pycache__,docs,venv"
