@@ -26,4 +26,4 @@ El componente cliente se ejecuta en la máquina objetivo.
 - Cambios de directorio (`cd`).
 - Descripción de archivos.
 
-*Nota: La arquitectura y código fuente completo se mantienen únicamente en el repositorio privado de GitLab por razones de seguridad.*
+*Nota: La arquitectura y código fuente completo se mantienen en este repositorio bajo principios de divulgación responsable.*
